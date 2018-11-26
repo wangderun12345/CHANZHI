@@ -1,0 +1,44 @@
+package com.freemark.hello.demo;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.HashMap;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Map;
+
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+
+public class Freemark_demo01 {
+	public static void main(String[] args) throws IOException, TemplateException {
+		Configuration configuration = new Configuration();
+		configuration.setDirectoryForTemplateLoading(new File("src/com/freemark/hello/template"));
+		configuration.setDefaultEncoding("utf-8");
+		Template template = configuration.getTemplate("freemarkdemo.ftl");
+		HashMap<String, Object> map = new HashMap<String,Object>();
+		map.put("classPath","com.freemark.hello.demo");
+    	map.put("className","Demo111");
+    	map.put("sutname","蝉知");
+    	map.put("id","1");
+    	map.put("type","bug");
+    	map.put("name","王得润");
+    	map.put("requirement","login");
+    	map.put("precondition","***");
+    	map.put("conclusion","*****");
+    	map.put("summary","*******");
+    	map.put("operation","admin");
+    	map.put("expected","**");
+    	map.put("measured","**");
+    	map.put("passed","***");
+    	map.put("date","1998-08-11");
+    	map.put("remark","***");
+
+		Writer out = new FileWriter("src/com/freemark/hello/demo/test.html");
+		System.out.println("***************html文件生成成功！********************");
+		template.process(map, out);
+		out.close();
+	}
+}
